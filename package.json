@@ -13,12 +13,12 @@
    },
    "repository": {
       "type": "git",
-      "url": "https://github.com/faulkj/agl.git"
+      "url": "https://github.com/faulkj/agljs.git"
    },
    "bugs": {
-      "url": "https://github.com/faulkj/agl/issues"
+      "url": "https://github.com/faulkj/agljs/issues"
    },
-   "homepage": "https://github.com/faulkj/agl#readme",
+   "homepage": "https://github.com/faulkj/agljs#readme",
    "author": "Joshua Faulkenberry <j@joshuafaulkenberry.com> (https://joshuafaulkenberry.com/)",
    "license": "Kopimi",
    "keywords": [
