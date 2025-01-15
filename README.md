@@ -1,6 +1,6 @@
 
 # ***`AGL.js`*** | Epic Active Guidelines Simplified
-`AGL.js` is a TypeScript framework for integrating web applications with Epic’s Active Guidelines (AGL) platform. It simplifies communication between an embedded web app and Epic Hyperspace through cross-domain messaging, providing tools for queuing actions, handling events, managing subscriptions, and saving application state. `AGL.js` abstracts the low-level details of AGL communication while remaining lightweight and flexible.
+`AGL.js` is a modern framework for integrating web applications with Epic’s Active Guidelines (AGL) platform. Built with TypeScript but fully usable with modern JavaScript, it abstracts the low-level details of AGL communication while remaining lightweight and flexible.
 
 The framework streamlines interaction between web applications and AGL, including:
 

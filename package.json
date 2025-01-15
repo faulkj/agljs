@@ -1,7 +1,7 @@
 {
    "name": "agljs",
    "version": "1.0.0",
-   "description": "A lightweight TypeScript framework for integrating web apps with Epic's Active Guidelines (AGL) platform. Manage action queuing, event handling, subscriptions, and state within Epic Hyperspace via cross-domain messaging.",
+   "description": "A lightweight framework for integrating web apps with Epic's Active Guidelines platform, using modern JavaScript features. Manage action queuing, event handling, subscriptions, and state within Epic Hyperspace.",
    "main": "js/agl.js",
    "types": "types.d.ts",
    "exports": {
