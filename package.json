@@ -1,24 +1,44 @@
 {
    "name": "agljs",
    "version": "1.0.0",
-   "description": "",
+   "description": "A lightweight TypeScript framework for integrating web apps with Epic's Active Guidelines (AGL) platform. Manage action queuing, event handling, subscriptions, and state within Epic Hyperspace via cross-domain messaging.",
    "main": "js/agl.js",
-   "scripts": {
-      "build": "rollup -c --configPlugin typescript",
-      "watch": "rollup -c --watch --configPlugin typescript"
+   "types": "types.d.ts",
+   "exports": {
+      ".": {
+         "import": "./ts/AGL.ts",
+         "require": "./js/agl.js"
+      },
+      "./js": "./js/agl.js"
    },
    "repository": {
       "type": "git",
-      "url": "git+https://github.com/faulkj/agl.git"
+      "url": "https://github.com/faulkj/agl.git"
    },
-   "keywords": [],
-   "author": "",
-   "license": "ISC",
-   "type": "commonjs",
    "bugs": {
       "url": "https://github.com/faulkj/agl/issues"
    },
    "homepage": "https://github.com/faulkj/agl#readme",
+   "author": "Joshua Faulkenberry <j@joshuafaulkenberry.com> (https://joshuafaulkenberry.com/)",
+   "license": "Kopimi",
+   "keywords": [
+      "Epic",
+      "Epic Hyperspace",
+      "Epic Hyperdrive",
+      "Active Guidelines",
+      "AGL",
+      "TypeScript",
+      "EHR",
+      "clinical decision support",
+      "CDS",
+      "healthcare"
+   ],
+   "scripts": {
+      "build": "rollup -c --configPlugin typescript",
+      "publish patch": "npm run build && npm version patch && git push && git push --tags && npm publish",
+      "publish minor": "npm run build && npm version minor && git push && git push --tags && npm publish",
+      "publish major": "npm run build && npm version major && git push && git push --tags && npm publish"
+   },
    "devDependencies": {
       "@rollup/plugin-terser": "^0.4.4",
       "@rollup/plugin-typescript": "^12.1.2",

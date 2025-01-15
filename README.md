@@ -1,6 +1,6 @@
 
-# ***agljs*** - Epic Active Guidelines Simplified
-`agljs` is a TypeScript framework for integrating web applications with Epic’s Active Guidelines (AGL) platform. It simplifies communication between an embedded web app and Epic Hyperspace through cross-domain messaging, providing tools for queuing actions, handling events, managing subscriptions, and saving application state. `agljs` abstracts the low-level details of AGL communication while remaining lightweight and flexible.
+# ***`AGL.js`*** | Epic Active Guidelines Simplified
+`AGL.js` is a TypeScript framework for integrating web applications with Epic’s Active Guidelines (AGL) platform. It simplifies communication between an embedded web app and Epic Hyperspace through cross-domain messaging, providing tools for queuing actions, handling events, managing subscriptions, and saving application state. `AGL.js` abstracts the low-level details of AGL communication while remaining lightweight and flexible.
 
 The framework streamlines interaction between web applications and AGL, including:
 
@@ -25,7 +25,7 @@ The framework streamlines interaction between web applications and AGL, includin
 
 
 ## Disclaimer
-*This library is not affiliated with or endorsed by Epic Systems Corporation. It is intended solely for use by organizations with active Epic licenses. Please ensure compliance with your Epic agreements before using or distributing this library.*
+*`AGL.js` is not affiliated with or endorsed by Epic Systems Corporation. It is intended solely for use by organizations with active Epic licenses. Please ensure compliance with your Epic agreements before using or distributing this library.*
 
 
 ## Getting Started
@@ -90,7 +90,7 @@ const agl = new AGL()
 
 ### 🔗 Via CDN
 
-Add `agljs` from a CDN like **jsDelivr**:
+Add `AGL.js` from a CDN, such as **jsDelivr**:
 
 ```html
 <script src="https://cdn.jsdelivr.net/npm/agljs/agl.min.js"></script>
@@ -164,13 +164,13 @@ agl.on('navigate', (event) => {
 ## Parameters
 
 ### `active` (read-only)
-Indicates whether the `agljs` framework is active and initialized.
+Indicates whether the `AGL.js` framework is active and initialized.
 
-- If `agljs` is already initialized, returns `true` or `false`.
-- If `agljs` is still initializing, returns a promise that resolves to `true` or `false`.
+- If `AGL.js` is already initialized, returns `true` or `false`.
+- If `AGL.js` is still initializing, returns a promise that resolves to `true` or `false`.
 
 **Usage**:
-Before performing any actions, ensure `agljs` has completed initialization:
+Before performing any actions, ensure `AGL.js` has completed initialization:
 
 **Example**:
 ```typescript
@@ -352,7 +352,7 @@ agl.on('aglEvent', (event) => {
 
 
 ## State Management
-`agljs` supports saving and restoring app state during transitions or hibernation.
+`AGL.js` supports saving and restoring app state during transitions or hibernation.
 
 ### Saving State
 To save the current state of your application, use the `SaveState` action.
@@ -403,7 +403,7 @@ agl.on('navigate', ({ direction }) => {
 ```
 
 ### Saving Navigation History
-Save custom navigation states using `SaveHistoryState`. `agljs` will persist these states for the current session.
+Save custom navigation states using `SaveHistoryState`. `AGL.js` will persist these states for the current session.
 
 **Example**:
 ```typescript

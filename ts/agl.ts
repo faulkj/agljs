@@ -1,7 +1,7 @@
 /*!
  * agljs
  * Author: Joshua Faulkenberry
- * License: kopime
+ * License: Kopimi
  * Copyright 2025
  */
 
