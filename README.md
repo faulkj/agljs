@@ -45,13 +45,13 @@ yarn add agljs
 #### JavaScript
 
 ```javascript
-import agl from 'agljs/js'
+import AGL from 'agljs/js'
 
 (async () => {
-  const myagl = new agl();
+  const agl = new AGL();
 
-  if (await myagl.active) {
-    console.log(myagl.details.availableActions); //Logs available AGL actions
+  if (await agl.active) {
+    console.log(agl.details.availableActions); //Logs available AGL actions
   }
 })();
 ```
@@ -59,13 +59,13 @@ import agl from 'agljs/js'
 #### TypeScript
 
 ```typescript
-import agl from 'agljs'
+import AGL from 'agljs'
 
-const myagl = new agl()
+const agl = new AGL()
 
 (async () => {
-  if (await myagl.active) {
-    console.log(myagl.active) //Logs true (boolean)
+  if (await agl.active) {
+    console.log(agl.active) //Logs true (boolean)
   }
 })()
 ```
@@ -78,11 +78,11 @@ const myagl = new agl()
 ```html
 <script src="path/to/agl.min.js"></script>
 <script>
-  const myagl = new agl();
+  const agl = new AGL();
 
   //For browsers that don't support async/await
-  Promise.resolve(myagl.active).then(function(active) {
-    console.log(myagl.active); //Logs true or false (boolean)
+  Promise.resolve(agl.active).then(function(active) {
+    console.log(agl.active); //Logs true or false (boolean)
   });
 </script>
 ```
@@ -95,12 +95,12 @@ Add `agljs` from a CDN like **jsDelivr**:
 ```html
 <script src="https://cdn.jsdelivr.net/npm/agljs/agl.min.js"></script>
 <script>
-  const myagl = new agl();
+  const agl = new AGL();
 
   //For browsers that don't support async/await
-  Promise.resolve(myagl.active).then(function(active) {
+  Promise.resolve(agl.active).then(function(active) {
     if (active) {
-      console.log(myagl.details.availableActions); //Logs available AGL actions
+      console.log(agl.details.availableActions); //Logs available AGL actions
     }
   });
 </script>
@@ -124,7 +124,7 @@ The `AGL` constructor accepts an optional configuration object with the followin
 
 ### Example Configuration
 ```typescript
-const myagl = new agl({
+const agl = new AGL({
    debug: true,
    timeout: 5000,
    subscribe: {
@@ -138,11 +138,11 @@ const myagl = new agl({
 
 
 ## Usage
-All actions must wait for the AGL handshake to complete and for the framework to confirm it is running inside Epic. This is done by checking if (await agl.active).
+All actions must wait for the AGL handshake to complete and for the framework to confirm it is running inside Epic. This is done by checking `if (await agl.active)`.
 
 **Example**:
 ```typescript
-const myagl = new agl();
+const agl = new AGL();
 
 if (await agl.active) {
    agl.do('Epic.Clinical.Informatics.Web.SaveState', { state: 'example' })
@@ -152,8 +152,8 @@ if (await agl.active) {
 ```
 **Example**:
 ```typescript
-const myagl = new agl();
-if (!await agl.active) throw new Error('AGL is inactive!');
+const agl = new AGL();
+if (!await agl.active) throw new Error('AGL is inactive! We aren't in Epic!');
 
 agl.on('navigate', (event) => {
    console.log('User navigated:', event.direction);
@@ -164,13 +164,13 @@ agl.on('navigate', (event) => {
 ## Parameters
 
 ### `active` (read-only)
-Indicates whether the AGL framework is active and initialized.
+Indicates whether the `agljs` framework is active and initialized.
 
-- If AGL is already initialized, returns `true` or `false`.
-- If AGL is still initializing, returns a promise that resolves to `true` or `false`.
+- If `agljs` is already initialized, returns `true` or `false`.
+- If `agljs` is still initializing, returns a promise that resolves to `true` or `false`.
 
 **Usage**:
-Before performing any actions, ensure AGL has completed initialization:
+Before performing any actions, ensure `agljs` has completed initialization:
 
 **Example**:
 ```typescript
@@ -182,9 +182,7 @@ if (await agl.active) {
 For subsequent checks (once initialization is complete), you can use `agl.active` without `await`:
 ```typescript
 if (await agl.active) {
-   if (agl.active) {
-      console.log('AGL remains active.');
-   }
+   console.log(agl.active ? '✔ AGL is active.' : '❌ AGL is inactive.');
 }
 ```
 
@@ -221,11 +219,11 @@ agl.debug = true; // Enable debug logging
 ### `do(action, args = null, haltOnError = false)`
 Executes an action within AGL.
 
-| Parameter      | Type       | Description                                                          |
-|----------------|------------|----------------------------------------------------------------------|
-| `action`       | `string`   | The name of the action to perform                                    |
-| `args`         | `object`   | *Optional*  Arguments to pass with the action                        |
-| `haltOnError`  | `boolean`  | *Optional*  Stops the queue if this action fails, preventing subsequent actions from running    |
+| Parameter      | Type       | Description                                                                                  |
+|----------------|------------|----------------------------------------------------------------------------------------------|
+| `action`       | `string`   | The name of the action to perform                                                            |
+| `args`         | `object`   | *Optional*  Arguments to pass with the action                                                |
+| `haltOnError`  | `boolean`  | *Optional*  Stops the queue if this action fails, preventing subsequent actions from running |
 
 **Example**: Basic Action
 ```typescript
@@ -303,7 +301,7 @@ You can override internal error handling by providing a custom `onError` callbac
 
 **Example**: During instantiation
 ```typescript
-const myagl = new agl({
+const agl = new AGL({
    onError: (error) => {
       console.error('Custom error handler:', error.message);
    },
@@ -324,7 +322,7 @@ To confirm that each subscription was successfully processed during the handshak
 
 **Example**:
 ```typescript
-const myagl = new agl({
+const agl = new AGL({
    subscribe: {
       "Epic.Patient.Demographics.Updated": { IncludeHistory: true },
       "Epic.Common.RequestToCloseApp": { PauseDuration: 200 }
@@ -354,7 +352,7 @@ agl.on('aglEvent', (event) => {
 
 
 ## State Management
-AGL supports saving and restoring app state during transitions or hibernation.
+`agljs` supports saving and restoring app state during transitions or hibernation.
 
 ### Saving State
 To save the current state of your application, use the `SaveState` action.
@@ -405,7 +403,7 @@ agl.on('navigate', ({ direction }) => {
 ```
 
 ### Saving Navigation History
-Save custom navigation states using `SaveHistoryState`. AGL will persist these states for the current session.
+Save custom navigation states using `SaveHistoryState`. `agljs` will persist these states for the current session.
 
 **Example**:
 ```typescript

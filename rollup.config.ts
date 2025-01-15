@@ -4,12 +4,10 @@ import { defineConfig } from 'rollup'
 import fs from 'fs'
 import path from 'path'
 
-const inputFile = path.resolve('ts/agl.ts')
+const inputFile = path.resolve('ts/AGL.ts')
 
 function getTopBanner() {
-   const source = fs.readFileSync(inputFile, 'utf8')
-   // A quick regex to find a top-of-file comment starting with `/*!`
-   const match = source.match(/^\/\*![\s\S]*?\*\//)
+   const match = fs.readFileSync(inputFile, 'utf8').match(/^\/\*![\s\S]*?\*\//)
    return match ? match[0] : ''
 }
 
@@ -48,7 +46,8 @@ export default defineConfig([
       ],
       plugins: [
          typescript({
-            removeComments: true
+            removeComments: true,
+            declaration: false
          })
       ]
    }

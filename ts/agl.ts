@@ -5,8 +5,8 @@
  * Copyright 2025
  */
 
-export default class agl {
-   static #instance: agl | null = null
+export default class AGL {
+   static #instance: AGL | null = null
    #active: boolean | null = null // null = initializing, true = active, false = inactive
    #debug: boolean = false
    #timeout: number = 2000
@@ -45,20 +45,20 @@ export default class agl {
       } = config
       let initial = true
 
-      if (!agl.#instance) agl.#instance = this
+      if (!AGL.#instance) AGL.#instance = this
       else {
          console.warn('[AGL] Reconfiguring existing instance. Previous settings may be overwritten.');
          initial = false
       }
 
-      agl.#instance.#debug = debug
-      agl.#instance.#timeout = timeout;
+      AGL.#instance.#debug = debug
+      AGL.#instance.#timeout = timeout;
 
       (Object.keys(callbacks) as Array<keyof AGLConfig>)
          .forEach((key) => {
             if (key.startsWith('on')) {
                const eventName = key.replace(/^on/, '').toLowerCase() as keyof AGLEvents
-               agl.#instance!.#callbacks[eventName] = (callbacks as any)[key] as AGLEvents[typeof eventName]
+               AGL.#instance!.#callbacks[eventName] = (callbacks as any)[key] as AGLEvents[typeof eventName]
             }
          })
 
@@ -91,7 +91,7 @@ export default class agl {
             this.#log('AGL is not initialized')
          }
       }
-      else return agl.#instance
+      else return AGL.#instance
    }
 
    public get active(): Promise<boolean> | boolean {
