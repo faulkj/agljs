@@ -428,6 +428,7 @@ agl.do('Epic.Clinical.Informatics.Web.SetEnabledHistBtns', {
 
 Contributions are welcome! Please fork the repository, create a new branch, and submit a pull request.
 
----
+## ![Kopimi License](https://img.shields.io/badge/license-Kopimi-black?style=flat-square)  License
+This software is free and unencumbered, released into the public domain.
 
-![Kopimi License](https://img.shields.io/badge/license-Kopimi-black?style=flat-square)
+If used, borrowed, modified, or incorporated into a commercial product or service, proper attribution is expected
