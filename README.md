@@ -42,20 +42,6 @@ npm install agljs
 yarn add agljs
 ```
 
-#### JavaScript
-
-```javascript
-import AGL from 'agljs/js'
-
-(async () => {
-  const agl = new AGL();
-
-  if (await agl.active) {
-    console.log(agl.details.availableActions); //Logs available AGL actions
-  }
-})();
-```
-
 #### TypeScript
 
 ```typescript
@@ -68,6 +54,20 @@ const agl = new AGL()
     console.log(agl.active) //Logs true (boolean)
   }
 })()
+```
+
+#### JavaScript
+
+```javascript
+import AGL from 'agljs/js/agl.js';
+
+(async () => {
+  const agl = new AGL();
+
+  if (await agl.active) {
+    console.log(agl.details.availableActions); //Logs available AGL actions
+  }
+})();
 ```
 
 ### 💾 Download
