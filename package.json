@@ -2,15 +2,8 @@
    "name": "agljs",
    "version": "1.0.0",
    "description": "A lightweight framework for integrating web apps with Epic's Active Guidelines platform, using modern JavaScript features. Manage action queuing, event handling, subscriptions, and state within Epic Hyperspace.",
-   "main": "js/agl.js",
+   "main": "ts/AGL.ts",
    "types": "types.d.ts",
-   "exports": {
-      ".": {
-         "import": "./ts/AGL.ts",
-         "require": "./js/agl.js"
-      },
-      "./js": "./js/agl.js"
-   },
    "repository": {
       "type": "git",
       "url": "https://github.com/faulkj/agljs.git"
@@ -34,10 +27,7 @@
       "healthcare"
    ],
    "scripts": {
-      "build": "rollup -c --configPlugin typescript",
-      "publish patch": "npm run build && npm version patch && git push && git push --tags && npm publish",
-      "publish minor": "npm run build && npm version minor && git push && git push --tags && npm publish",
-      "publish major": "npm run build && npm version major && git push && git push --tags && npm publish"
+      "build": "rollup -c --configPlugin typescript"
    },
    "devDependencies": {
       "@rollup/plugin-terser": "^0.4.4",
