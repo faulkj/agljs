@@ -93,7 +93,7 @@ import AGL from 'agljs/js/agl.js';
 Add `AGL.js` from a CDN, such as **jsDelivr**:
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/agljs/agl.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/agljs/js/agl.min.js"></script>
 <script>
   const agl = new AGL();
 

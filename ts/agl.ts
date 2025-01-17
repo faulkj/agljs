@@ -1,5 +1,5 @@
 /*!
- * agljs
+ * AGL.js
  * Author: Joshua Faulkenberry
  * License: Kopimi
  * Copyright 2025
