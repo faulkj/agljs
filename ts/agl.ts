@@ -1,8 +1,8 @@
 /*!
- * AGL.js
+ * agljs
  * Author: Joshua Faulkenberry
  * License: Kopimi
- * Copyright 2025
+ * Copyright 2026
  */
 
 export default class AGL {
@@ -143,6 +143,20 @@ export default class AGL {
          if (args) msg.args = args
 
          const listener = (event: MessageEvent) => {
+            if (event.data?.error) {
+               window.removeEventListener('message', listener)
+               const error: Parameters<AGLEvents['error']>[0] = {
+                  message: event.data.error as string,
+                  details: Array.isArray(event.data.errorCodes) ? event.data.errorCodes.map((c: number) => this.#errorCodes[c] ?? `Error code: ${c}`) : []
+               }
+               this.#log('Epic action error:', error)
+               if (this.#callbacks.error) {
+                  this.#callbacks.error(error)
+                  resolve(false)
+               } else reject(new Error(error.message!))
+               return
+            }
+
             const { success, error } = this.#processor(event)
 
             window.removeEventListener('message', listener)
@@ -175,7 +189,11 @@ export default class AGL {
 
    #processor(event: MessageEvent): { success: boolean, error?: Parameters<AGLEvents['error']>[0] } {
       this.#log('Received message:', event.data)
-      if (!event.data || typeof event.data !== 'object' || !('token' in event.data || 'actions' in event.data)) {
+      if (
+         !event.data ||
+         typeof event.data !== 'object' ||
+         !('token' in event.data || 'actions' in event.data || 'actionExecuted' in event.data || 'error' in event.data)
+      ) {
          this.#log('Invalid message received:', event.data)
          return { success: false, error: { message: 'Invalid message format', details: [] } }
       }
@@ -192,7 +210,6 @@ export default class AGL {
 
       if (error) {
          this.#log('Error received:', error)
-         this.#callbacks.error?.(error)
       }
 
       return { success, error }
@@ -266,6 +283,6 @@ export default class AGL {
    }
 
    #log(...args: any[]) {
-      this.#debug && console.debug('[AGL]', ...args)
+      this.#debug && console.log('[AGL]', ...args)
    }
 }

@@ -27,4 +27,5 @@ declare global {
    }
 }
 
+export { default } from './ts/AGL'
 export { AGLConfig, AGLDetails, AGLEvents }
