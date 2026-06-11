@@ -18,7 +18,7 @@ export default defineConfig([
          {
             name: 'agl',
             file: 'js/agl.js',
-            format: 'iife',
+            format: 'cjs',
             sourcemap: true,
             plugins: [
                terser({
