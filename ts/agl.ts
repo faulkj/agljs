@@ -73,7 +73,7 @@ export default class AGL {
                   args['SubscriptionRequests'].push({ EventName: key, EventArgs: value })
             }
 
-            this.#handshake = this.#_do('InitiateHandshake')
+            this.#handshake = this.#_do('InitiateHandshake', Object.keys(args).length ? args : null)
                .then(() => {
                   this.#active = true
                   this.#log('Handshake complete, AGL is initialized')
@@ -144,6 +144,7 @@ export default class AGL {
 
          const listener = (event: MessageEvent) => {
             if (event.data?.error) {
+               clearTimeout(timer)
                window.removeEventListener('message', listener)
                const error: Parameters<AGLEvents['error']>[0] = {
                   message: event.data.error as string,
@@ -159,6 +160,7 @@ export default class AGL {
 
             const { success, error } = this.#processor(event)
 
+            clearTimeout(timer)
             window.removeEventListener('message', listener)
             if (success) resolve(true)
             else if (this.#callbacks.error) {
@@ -172,7 +174,7 @@ export default class AGL {
          this.#log('Sending message:', msg)
          window.parent.postMessage(msg, '*')
 
-         setTimeout(() => {
+         const timer = setTimeout(() => {
             window.removeEventListener('message', listener)
             const timeoutError = new Error('Timeout waiting for response')
             if (this.#callbacks.error) {
