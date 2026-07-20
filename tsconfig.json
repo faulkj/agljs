@@ -3,11 +3,9 @@
     "target": "ES2022",
     "module": "ESNext",
     "moduleResolution": "bundler",
-    "rootDir": ".",
-    "outDir": "./js",
     "strict": true,
     "esModuleInterop": true,
-    "declaration": true
+    "noEmit": true
   },
   "include": [
     "*.d.ts",

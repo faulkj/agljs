@@ -1,7 +1,7 @@
 {
    "name": "agljs",
-   "version": "1.0.6",
-   "description": "AGL.js is a lightweight framework for integrating web apps with Epic's Active Guidelines platform, using modern JavaScript features. Manage action queuing, event handling, subscriptions, and state within Epic Hyperspace.",
+   "version": "1.1.0",
+   "description": "A lightweight framework for integrating web apps with Epic's Active Guidelines platform, using modern JavaScript features. Manage action queuing, event handling, subscriptions, and state within Epic Hyperspace.",
    "main": "js/agl.js",
    "module": "js/agl.mjs",
    "types": "agl.d.ts",
@@ -44,15 +44,16 @@
       "healthcare"
    ],
    "scripts": {
-      "build": "rollup -c --configPlugin typescript",
+      "typecheck": "tsc --noEmit",
+      "build": "npm run typecheck && rollup -c",
       "prepack": "npm run build"
    },
    "devDependencies": {
       "@rollup/plugin-terser": "^1.0.0",
-      "@rollup/plugin-typescript": "^12.3.0",
-      "rollup": "^4.61.1",
-      "ts-node": "^10.9.2",
+      "esbuild": "^0.28.1",
+      "rollup": "^4.62.2",
+      "rollup-plugin-esbuild": "^6.2.1",
       "tslib": "^2.8.1",
-      "typescript": "^6.0.3"
+      "typescript": "^7.0.2"
    }
 }
