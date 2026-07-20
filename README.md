@@ -1,14 +1,14 @@
 
-# ***`AGL.js`*** | Epic Active Guidelines Simplified
-`AGL.js` is a modern framework for integrating web applications with Epic’s Active Guidelines (AGL) platform. Built with TypeScript but fully usable with modern JavaScript, it abstracts the low-level details of AGL communication while remaining lightweight and flexible.
+# `AGL.js` | Epic Active Guidelines
+`AGL.js` handles the low-level `postMessage` communication between a web app and Epic's Active Guidelines (AGL) platform. Written in TypeScript, usable from JavaScript.
 
-The framework streamlines interaction between web applications and AGL, including:
+It handles:
 
-- Confirming whether the web app is running inside Epic
-- Facilitating communication with the Epic backend
+- Detecting whether the app is running inside Epic
+- Communicating with the Epic backend
 - Triggering and queuing actions in Hyperspace
 - Subscribing to and handling AGL events
-- Managing application state and navigation history
+- App state and navigation history
 
 
 ## Table of Contents
@@ -32,13 +32,11 @@ The framework streamlines interaction between web applications and AGL, includin
 
 ### 📦 Installation
 
-For **modern JavaScript/TypeScript projects**, install via **npm** or **yarn**:
+Install via npm or yarn:
 
 ```bash
-# npm
 npm install agljs
-
-# yarn
+# or
 yarn add agljs
 ```
 
@@ -48,60 +46,40 @@ yarn add agljs
 import AGL from 'agljs'
 
 const agl = new AGL()
-
-(async () => {
-  if (await agl.active) {
-    console.log(agl.active) //Logs true (boolean)
-  }
-})()
+if (await agl.active) console.log(agl.details.availableActions)
 ```
 
-#### JavaScript
+#### JavaScript (ESM)
 
 ```javascript
-import AGL from 'agljs/js/agl.js';
+import AGL from 'agljs'
 
-(async () => {
-  const agl = new AGL();
-
-  if (await agl.active) {
-    console.log(agl.details.availableActions); //Logs available AGL actions
-  }
-})();
+const agl = new AGL()
+if (await agl.active) console.log(agl.details.availableActions)
 ```
 
-### 💾 Download
+#### JavaScript (CommonJS)
 
-1. Download the latest release from the [GitHub repository](https://github.com/faulkj/agljs).
-2. Include `agl.min.js` in your project:
+```javascript
+const AGL = require('agljs').default
 
-```html
-<script src="path/to/agl.min.js"></script>
-<script>
-  const agl = new AGL();
-
-  //For browsers that don't support async/await
-  Promise.resolve(agl.active).then(function(active) {
-    console.log(agl.active); //Logs true or false (boolean)
-  });
-</script>
+const agl = new AGL()
+agl.active.then(active => active && console.log(agl.details.availableActions))
 ```
 
+### 💾 Script Tag (download or CDN)
 
-### 🔗 Via CDN
-
-Add `AGL.js` from a CDN, such as **jsDelivr**:
+Download `agl.min.js` from the [releases page](https://github.com/faulkj/agljs), or load it from a CDN such as jsDelivr:
 
 ```html
+<!-- local: <script src="path/to/agl.min.js"></script> -->
 <script src="https://cdn.jsdelivr.net/npm/agljs/js/agl.min.js"></script>
 <script>
   const agl = new AGL();
 
-  //For browsers that don't support async/await
+  // Promise form for environments without top-level await
   Promise.resolve(agl.active).then(function(active) {
-    if (active) {
-      console.log(agl.details.availableActions); //Logs available AGL actions
-    }
+    if (active) console.log(agl.details.availableActions);
   });
 </script>
 ```
@@ -138,7 +116,7 @@ const agl = new AGL({
 
 
 ## Usage
-All actions must wait for the AGL handshake to complete and for the framework to confirm it is running inside Epic. This is done by checking `if (await agl.active)`.
+All actions must wait for the AGL handshake to complete and confirm the app is running inside Epic, via `if (await agl.active)`.
 
 **Example**:
 ```typescript
@@ -153,7 +131,7 @@ if (await agl.active) {
 **Example**:
 ```typescript
 const agl = new AGL();
-if (!await agl.active) throw new Error('AGL is inactive! We aren't in Epic!');
+if (!await agl.active) throw new Error('AGL is inactive! Not running in Epic.');
 
 agl.on('navigate', (event) => {
    console.log('User navigated:', event.direction);
@@ -164,26 +142,10 @@ agl.on('navigate', (event) => {
 ## Parameters
 
 ### `active` (read-only)
-Indicates whether the `AGL.js` framework is active and initialized.
+Whether AGL is active and initialized. During initialization it returns a `Promise<boolean>`; once resolved it returns the `boolean` directly. Always `await` it before performing actions:
 
-- If `AGL.js` is already initialized, returns `true` or `false`.
-- If `AGL.js` is still initializing, returns a promise that resolves to `true` or `false`.
-
-**Usage**:
-Before performing any actions, ensure `AGL.js` has completed initialization:
-
-**Example**:
 ```typescript
-if (await agl.active) {
-   console.log('AGL is initialized and ready.');
-}
-```
-
-For subsequent checks (once initialization is complete), you can use `agl.active` without `await`:
-```typescript
-if (await agl.active) {
-   console.log(agl.active ? '✔ AGL is active.' : '❌ AGL is inactive.');
-}
+if (await agl.active) console.log('AGL is initialized and ready.');
 ```
 
 ### `details` (read-only)
@@ -424,9 +386,9 @@ agl.do('Epic.Clinical.Informatics.Web.SetEnabledHistBtns', {
 ```
 
 
-## 🤝 Contributing
+## Contributing
 
-Contributions are welcome! Please fork the repository, create a new branch, and submit a pull request.
+Fork, branch, and open a pull request.
 
 ## ![Kopimi License](https://img.shields.io/badge/license-Kopimi-black?style=flat-square)  License
-This project operates under the Kopimi ethos.  It is free to use, modify, and share.  However, if the code itself is used, borrowed, modified, or incorporated into a commercial product or service, proper attribution is required.
+Kopimi. Free to use, modify, and share. If the code is used, borrowed, modified, or incorporated into a commercial product or service, attribution is required.
