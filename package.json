@@ -3,7 +3,19 @@
    "version": "1.0.6",
    "description": "AGL.js is a lightweight framework for integrating web apps with Epic's Active Guidelines platform, using modern JavaScript features. Manage action queuing, event handling, subscriptions, and state within Epic Hyperspace.",
    "main": "js/agl.js",
+   "module": "js/agl.mjs",
    "types": "agl.d.ts",
+   "exports": {
+      ".": {
+         "types": "./agl.d.ts",
+         "import": "./js/agl.mjs",
+         "require": "./js/agl.js",
+         "default": "./js/agl.js"
+      },
+      "./js/*": "./js/*",
+      "./package.json": "./package.json"
+   },
+   "sideEffects": false,
    "files": [
       "js/",
       "ts/",
@@ -32,7 +44,8 @@
       "healthcare"
    ],
    "scripts": {
-      "build": "rollup -c --configPlugin typescript"
+      "build": "rollup -c --configPlugin typescript",
+      "prepack": "npm run build"
    },
    "devDependencies": {
       "@rollup/plugin-terser": "^1.0.0",

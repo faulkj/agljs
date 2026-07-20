@@ -16,6 +16,22 @@ export default defineConfig([
       input: inputFile,
       output: [
          {
+            file: 'js/agl.mjs',
+            format: 'es',
+            sourcemap: true,
+            plugins: [
+               terser({
+                  compress: false,
+                  mangle: false,
+                  format: {
+                     comments: false,
+                     beautify: true,
+                     preamble: getTopBanner()
+                  }
+               })
+            ]
+         },
+         {
             name: 'agl',
             file: 'js/agl.js',
             format: 'cjs',
